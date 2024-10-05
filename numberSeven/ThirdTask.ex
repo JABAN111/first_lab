@@ -9,7 +9,7 @@ defmodule PrimeWithMap do
 
   defp is_prime(2), do: true
 
-  defp is_prime(number) when number > 2 do
+  defp is_prime(number) when number > 1 do
     check_prime(number, 2)
   end
 
@@ -26,3 +26,4 @@ defmodule PrimeWithMap do
     end
   end
 end
+IO.inspect(PrimeWithMap.find_nth_prime(1000001))

@@ -1,17 +1,7 @@
-defmodule PrimeModularWithReduce do
+defmodule PrimeWithFor do
   def find_nth_prime(n) do
-    Stream.iterate(2, &(&1 + 1))
-    |> Stream.filter(&is_prime/1)
-    |> Enum.take(n)
-    # |> Enum.reduce({[], 0}, fn prime, {acc, count} ->
-    #   if count < n do
-    #     {acc ++ [prime], count + 1}
-    #   else
-    #     {acc, count}
-    #   end
-    # end)
-    # |> elem(0)
-    |> List.last()
+    primes = for num <- 2..164_858_67, is_prime(num), do: num
+    Enum.at(primes, n - 1)
   end
 
   defp is_prime(2), do: true
@@ -33,4 +23,4 @@ defmodule PrimeModularWithReduce do
     end
   end
 end
-IO.inspect(PrimeModularWithReduce.find_nth_prime(1000001))
+IO.inspect(PrimeWithFor.find_nth_prime(1000001))

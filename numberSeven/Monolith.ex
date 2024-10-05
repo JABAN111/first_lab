@@ -28,7 +28,6 @@ defmodule PrimeFinderWithTailCalling do
 end
 
 # Найдем 10001-е простое число
-# IO.inspect(PrimeFinderWithTailCalling.find_nth_prime(1000001))
 defmodule PrimeFinderWithoutOptimization do
   def find_nth_prime(n) do
     find_prime(2, n, 0)
@@ -50,7 +49,7 @@ defmodule PrimeFinderWithoutOptimization do
 
   defp is_prime(2), do: true
 
-  defp is_prime(number) when number > 2 do
+  defp is_prime(number) when number > 1 do
     check_prime(number, 2)
   end
 
@@ -68,4 +67,5 @@ defmodule PrimeFinderWithoutOptimization do
   end
 end
 
-IO.inspect(PrimeFinderWithoutOptimization.find_nth_prime(10001))
+IO.inspect(PrimeFinderWithTailCalling.find_nth_prime(1000001))
+IO.inspect(PrimeFinderWithoutOptimization.find_nth_prime(1000001))
