@@ -80,7 +80,7 @@ IO.inspect(PrimeModularWithReduce.find_nth_prime(1000001))
 
 
 3. генерация последовательности при помощи отображения (map)
-```
+```Elixir
 defmodule PrimeWithMap do
   def find_nth_prime(n) do
     Stream.iterate(2, &(&1 + 1))
@@ -186,7 +186,7 @@ func main() {
 
 
 ## Задание 26
-1.
+1.монолитные реализации с использованием рекурсии
 
 ```Elixir
 defmodule RecurringCycle do
@@ -222,7 +222,7 @@ end
 IO.inspect(RecurringCycle.longest_cycle(1000))
 ```
 
-2. 
+2. С модульной реализации, где явно разделена генерация последовательности, фильтрация и свёртка (должны использоваться функции reduce/fold, filter и аналогичные);
 ```Elixir 
 defmodule RecurringCycle do
   def longest_cycle(limit) do
@@ -251,7 +251,7 @@ IO.inspect(RecurringCycle.longest_cycle(1000))
 ```
 
 
-3. 
+3. генерация последовательности при помощи отображения (map)
 
 ```Elixir
 defmodule RecurringCycle do
@@ -280,7 +280,7 @@ IO.inspect(RecurringCycle.longest_cycle(1000))
 
 ```
 
-4. 
+4. работа с бесконечными списками для языков, поддерживающих ленивые коллекции или итераторы как часть языка 
 ``` Elixir
 defmodule RecurringCycle do
   def longest_cycle(limit) do
@@ -308,7 +308,47 @@ end
 IO.inspect(RecurringCycle.longest_cycle(1000))
 ```
 
+5. реализация на любом удобном для вас традиционном языке программирования для сравнения
 
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func recurringCycleLength(d int) int {
+	remainders := make(map[int]int)
+	remainder := 1 % d
+	position := 0
+
+	for remainder != 0 {
+		if pos, found := remainders[remainder]; found {
+			return position - pos
+		}
+		remainders[remainder] = position
+		remainder = (remainder * 10) % d
+		position++
+	}
+	return 0
+}
+
+func main() {
+	longest := 0
+	dWithLongestCycle := 0
+
+	for d := 2; d < 1000; d++ {
+		length := recurringCycleLength(d)
+		if length > longest {
+			longest = length
+			dWithLongestCycle = d
+		}
+	}
+
+	fmt.Printf("Ans: %d\n", dWithLongestCycle)
+}
+
+```
 # Выводы
 
 Крайне непривычно повсеместно использовать рекурсию вместо обыкновенных циклов, однако за счет Pattern Matching и прочих удобных инструментов становится не только быстро в написании, но и понятно как в императивных языках
